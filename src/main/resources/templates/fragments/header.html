@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
+
+<head>
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" 
+		  integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"></link>	
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"></link>
+</head>
+<body>
+
+<!-- Navbar -->
+	
+	<div class="navbar navbar-inverse navbar-fixed-top" th:fragment="header">
+		<div class="container">
+	        <div class="navbar-header">
+	            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse">
+	                <span class="icon-bar"></span>
+	                <span class="icon-bar"></span>
+	                <span class="icon-bar"></span>
+	            </button>
+	            <a class="navbar-brand" href="/">Bet Management</a> 
+	        </div>
+	        <div class="navbar-collapse collapse" id="nav-collapse">
+	            <ul class="nav navbar-nav navbar-right">
+	            	<li th:if="!${translatePage}">
+	            		<a href="/translate" sec:authorize="isAuthenticated()" th:accesskey="t">
+	            			<i class="fa fa-comments" aria-hidden="true"></i> Translate
+            			</a>
+	            	</li>
+	            	<li th:if="!${uploadPage}" >
+	            		<a href="/upload" sec:authorize="isAuthenticated()" th:accesskey="u">
+	            			<i class="fa fa-upload" aria-hidden="true"></i> Upload
+            			</a>
+	            	</li>
+	            	<li  th:if="!${reviewPage}">
+	            		<a href="/bets/all" sec:authorize="isAuthenticated()" th:accesskey="r">
+	            			<i class="fa fa-list" aria-hidden="true"></i> Review Bets
+            			</a>
+	            	</li>
+            		<li th:if="!${customerPage}">
+	            		<a href="/customers" sec:authorize="isAuthenticated()" th:accesskey="c">
+	            			<i class="fa fa-users" aria-hidden="true"></i> Customers
+            			</a>
+	            	</li> 
+	            	<li sec:authorize="hasAuthority('ADMIN')">
+	            		<a th:if="!${adminPage}" href="/admin" th:accesskey="a">
+	            		<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> Admin</a>
+	            	</li>
+	            	<li sec:authorize="isAuthenticated()" >
+	            		<a href="#" id="user-name">
+	            			<i class="fa fa-user-o" aria-hidden="true"> <span id="username" th:text=" ${userName}"></span></i>
+            			</a>
+           			</li>  
+           			<li>
+	            		<a href="/logout" sec:authorize="isAuthenticated()">
+	            			<i class="fa fa-sign-out" aria-hidden="true"></i> Logout
+            			</a>
+           			</li>
+	            </ul>
+	        </div>
+	        <!--/.nav-collapse -->
+        </div>
+	</div>
+<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</body>
+</html>

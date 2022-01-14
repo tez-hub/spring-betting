@@ -1,0 +1,68 @@
+body {
+	padding : 10px ;
+	padding-top: 70px;
+}
+
+#tabs .tab-content {
+	padding : 5px 15px;
+}
+
+.table-small {
+	width: 105%;
+}
+
+.center-content {
+	width:50%;
+	margin: 0 auto;
+	padding-top: 30px;
+}
+
+.center-content .buttons {
+	padding-left:50px;
+}
+
+.tab-content-half {
+	width:50%;	
+}
+
+/* .table-scroll tbody {
+    position: absolute;
+    overflow-y: scroll;
+    height: 68vh;
+}
+ */
+.table-scroll tr {
+    width: 95%;
+    table-layout: fixed;
+    display: inline-table;
+}
+
+.table-scroll thead > tr > th {
+    border: none;
+}
+
+.hand-cursor { 
+	cursor: pointer; 
+	cursor: hand; 
+}
+
+.table-hoverplus>tbody>tr:hover>td {
+ 	background-color: #eeeeee;
+}
+
+.error {
+	border-color: #ff0022;
+}
+
+#horse-form {
+	padding-left: 90px;
+}
+
+#horse-lead {
+	padding-left: 70px;
+} 
+
+#horse-button {
+	margin-left: 280px;
+	margin-top: 10px;
+}

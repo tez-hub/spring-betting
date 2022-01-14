@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+	<head>
+	  	<meta charset="UTF-8"></meta>
+		<title>Update Customer details</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"></link>
+	    <link rel="stylesheet" href="/styles/tabs.css"></link>
+	    <link rel="stylesheet" href="/styles/customers.css"></link>	    
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" 
+		  	  integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"></link>
+	  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.1.1/jquery-confirm.min.css"></link>
+	</head>
+	
+	<body>
+		<div th:replace="fragments/header :: header">&nbsp;</div>
+
+		<div id="tabs" class="container">	
+			<ul class="nav nav-tabs">
+				<li class="active">
+		        	<a href="#1" data-toggle="tab" th:accesskey="1">Update Balance</a>
+				</li>
+				<li> 
+					<a href="#2" data-toggle="tab" th:accesskey="2">Edit Details</a>
+				</li>
+			</ul>
+	
+			<div class="tab-content tab-small">				
+				<div class="tab-pane active table-tab" id="1">
+	        		<div class="container">
+	        			<div class="center-content">
+	        				<div th:if="${successMessage}" class="alert alert-success" role="alert">
+			        			<p th:text="${successMessage}" class="text-center"></p>
+			        		</div>
+			        		<div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+			        			<p th:text="${errorMessage}" class="text-center"></p>
+			        		</div>
+		        			<form class="form" th:method="post" th:object="${customer}" th:id="updateBalance" th:action="@{/balance/} + ${customer.username}">
+		        				<div class="form-group row">
+		        					<label for="track" class="col-sm-2 col-form-label">Balance:</label>
+		        					<div class="col-sm-10">
+		        						<input class="form-control" th:name="credit" th:id="credit" th:value="@{&euro;} + ${#numbers.formatDecimal(customer.credit, 0, 2)}" th:disabled="true"></input>
+		        					</div>
+		        				</div>
+		        				<div class="form-group row">
+		        					<label for="firstName" class="col-sm-2 col-form-label">Amount:</label>
+		        					<div class="col-sm-10">
+		        						<input type="text" class="form-control" th:autofocus="true" th:id="amount" th:name="amount"></input>
+		        					</div>
+		        				</div>		        				
+		        				<div class="center-content buttons">
+			        				<button type="button" class="btn btn-primary" name="deposit" id="deposit" value="deposit">Deposit</button>
+			        				<button type="button" class="btn btn-warning" name="withdraw" id="withdraw" value="withdraw">Withdraw</button>
+		        				</div>
+		        			</form>
+		        			<p><a href="/customers">Back...</a></p>
+		  				</div>						
+	        		</div>
+				</div>				
+				
+				<div class="tab-pane" id="2">
+	        		<div class="container">
+	        			<div class="center-content">
+		        			<p class="lead">Edit Details</p>
+		        			<form class="form" th:action="@{/customers/} + ${customer.username}" th:method="post" th:object="${customer}">
+		        				<div class="form-group row">
+		        					<label for="track" class="col-sm-2 col-form-label">Username:</label>
+		        					<div class="col-sm-10">
+		        						<input class="form-control" th:name="customername" th:id="customername" th:value="${username}" th:disabled="true" th:field="*{username}"></input>
+		        					</div>
+		        				</div>
+		        				<div class="form-group row">
+		        					<label for="firstName" class="col-sm-2 col-form-label">First Name:</label>
+		        					<div class="col-sm-10">
+		        						<input class="form-control" th:name="firstName" th:id="firstName" th:value="${firstName}" th:field="*{firstName}" th:autofocus="true" ></input>
+		        					</div>
+		        				</div>
+		        				<div class="form-group row">
+		        					<label for="lastName" class="col-sm-2 col-form-label">Last Name:</label>
+		        					<div class="col-sm-10">
+		        						<input class="form-control" th:name="lastName" th:id="lastName" th:value="${lastName}" th:field="*{lastName}"></input>
+		        					</div>
+		        				</div>
+		        				<div class="form-group row">
+									<label for="dob" class="col-sm-2 col-form-label">DOB:</label>
+									<div class="col-sm-10">
+										<input type="date" class="form-control" th:name="dob" th:id="dob" th:value="${DOB}" th:field="*{DOB}"></input> 
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="password" class="col-sm-2 col-form-label">Password:</label>
+									<div class="col-sm-10">
+										<input type="password" class="form-control" th:name="password" th:id="password" th:field="*{password}"></input> 
+									</div>
+								</div>
+		        				<button id="editCustomer" class="btn btn-primary pull-right">Update</button>
+		        			</form>
+		        			<p><a href="javascript:history.go(-1)">Back...</a></p>
+	        			</div>
+	        		</div>
+				</div>			
+			</div>
+		</div>
+		<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.1.1/jquery-confirm.min.js"></script>
+		<script src="/scripts/customer.js"></script>
+	</body>
+</html>
